@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/../../../src",
+                "${workspaceFolder}/../../../build/src",
+                "${workspaceFolder}/../../sqlite-autoconf-3250200/",
+                "${workspaceFolder}/../../dlib-19.15/",
+                "/home/xichao/ser_3559A/ncnn/examples/dlib-19.15",
+                "/home/xichao/ser_3559A/ncnn/src"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
