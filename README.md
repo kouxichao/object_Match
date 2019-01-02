@@ -3,7 +3,7 @@
 编译静态库：
 ```
 cd src
-make 
+make [MODEL="-DBNInception"] 	MODEL用来选择不同模型,默认模型速度较快模型较小，BNInception模型较大。
 生成libobj.a
 ```
 
@@ -11,13 +11,21 @@ demo测试：
 ```
 cd src
 make MODE="-DJPG_DEMO"
-生成demo_obj。
+生成demo_obj及evaluate。
 
 src目录下使用以下命令运行：
 1.特征存储 ：./demo_obj 0 ${num_features} ${image1_path} ${image2_path} ...
 2.识别：./demo_obj 1 ${image_path}
 ```
 
+evaluate测试
+```
+./evaluate 0 ${image_dir} 生成特征库
+
+./evaluate 1 ${image_dir} 测试准确率
+
+注： image_dir 格式同test_images。
+```
 库函数说明：
 ```
 // 说明：从已注册的物体中识别对应的物体
