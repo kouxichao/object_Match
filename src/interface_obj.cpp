@@ -187,12 +187,21 @@ char * DKObjectRegisterProcess(char* rgbfilename, int iWidth, int iHeight, DKSOb
     in.substract_mean_normalize(mean_vals, 0);
 
     ncnn::Net objectmatnet;
+#ifdef BNInception
+    objectmatnet.load_param("BNInception.param");
+    objectmatnet.load_model("BNInception.bin");
+    ncnn::Extractor ex = objectmatnet.create_extractor();
+    ex.set_light_mode(false);
+    ex.input("data", in);
+    ex.extract("Addmm_1", fc);
+#else
     objectmatnet.load_param("objectmatnet.param");
     objectmatnet.load_model("objectmatnet.bin");
     ncnn::Extractor ex = objectmatnet.create_extractor();
     ex.set_light_mode(true);
     ex.input("data", in);
     ex.extract("fc_embedding", fc);
+#endif
     normalize(fc);
 }
 
@@ -382,12 +391,22 @@ int DKObjectRecognizationProcess(char* rgbfilename, int iWidth, int iHeight, DKS
     in.substract_mean_normalize(mean_vals, 0);
     
     ncnn::Net objectmatnet;
+#ifdef BNInception
+    objectmatnet.load_param("BNInception.param");
+    objectmatnet.load_model("BNInception.bin");
+    ncnn::Extractor ex = objectmatnet.create_extractor();
+    ex.set_light_mode(false);
+    ex.input("data", in);
+    ex.extract("Addmm_1", fc);
+#else
     objectmatnet.load_param("objectmatnet.param");
     objectmatnet.load_model("objectmatnet.bin");
     ncnn::Extractor ex = objectmatnet.create_extractor();
     ex.set_light_mode(true);
     ex.input("data", in);
     ex.extract("fc_embedding", fc);
+#endif
+
 #ifdef DEBUG    
     clock_t finsh = clock();
     fprintf(stderr, "get_feature cost %d ms\n", (finsh-start)/1000);

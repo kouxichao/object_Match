@@ -1,4 +1,4 @@
-
+MODEL = 
 MODE = 
 CC = aarch64-himix100-linux-g++
 db = 
@@ -7,7 +7,7 @@ CFLAGS += -I$(PWD) \
 	-I$(PWD)/../sqlite \
 	-I$(PWD)/../dlib \
 	-L$(PWD)/../lib -lsqlite3 -ldlib -lncnn -ldl 
-CFLAGS += $(MODE) $(db) -O3 -fopenmp  -std=c++11 -mcpu=cortex-a53+simd -mcpu=cortex-a53+fp
+CFLAGS += $(MODE) $(MODEL) $(db) -O3 -fopenmp  -std=c++11 -mcpu=cortex-a53+simd -mcpu=cortex-a53+fp
 #SRCS := $(wildcard *.cpp)
 SRCS := interface_obj.cpp 
 

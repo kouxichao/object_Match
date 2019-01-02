@@ -1,0 +1,304 @@
+7767517
+302 500
+Input            data             0 1 data 0=3 1=227 2=227
+Convolution      ConvNd_1         1 1 data ConvNd_1 0=64 1=7 2=1 3=2 4=3 5=1 6=9408
+BatchNorm        BatchNorm_1      1 1 ConvNd_1 BatchNorm_1 0=64
+Scale            BatchNorm_1_scale 1 1 BatchNorm_1 BatchNorm_1_scale 0=64 1=1
+ReLU             Threshold_1      1 1 BatchNorm_1_scale Threshold_1 0=0.000000
+Pooling          MaxPool2d_1      1 1 Threshold_1 MaxPool2d_1 0=0 1=3 2=2 3=0 4=0
+Convolution      ConvNd_2         1 1 MaxPool2d_1 ConvNd_2 0=64 1=1 2=1 3=1 4=0 5=1 6=4096
+BatchNorm        BatchNorm_2      1 1 ConvNd_2 BatchNorm_2 0=64
+Scale            BatchNorm_2_scale 1 1 BatchNorm_2 BatchNorm_2_scale 0=64 1=1
+ReLU             Threshold_2      1 1 BatchNorm_2_scale Threshold_2 0=0.000000
+Convolution      ConvNd_3         1 1 Threshold_2 ConvNd_3 0=192 1=3 2=1 3=1 4=1 5=1 6=110592
+BatchNorm        BatchNorm_3      1 1 ConvNd_3 BatchNorm_3 0=192
+Scale            BatchNorm_3_scale 1 1 BatchNorm_3 BatchNorm_3_scale 0=192 1=1
+ReLU             Threshold_3      1 1 BatchNorm_3_scale Threshold_3 0=0.000000
+Pooling          MaxPool2d_2      1 1 Threshold_3 MaxPool2d_2 0=0 1=3 2=2 3=0 4=0
+Convolution      ConvNd_4         1 1 MaxPool2d_2 ConvNd_4 0=64 1=1 2=1 3=1 4=0 5=1 6=12288
+BatchNorm        BatchNorm_4      1 1 ConvNd_4 BatchNorm_4 0=64
+Scale            BatchNorm_4_scale 1 1 BatchNorm_4 BatchNorm_4_scale 0=64 1=1
+ReLU             Threshold_4      1 1 BatchNorm_4_scale Threshold_4 0=0.000000
+Convolution      ConvNd_5         1 1 MaxPool2d_2 ConvNd_5 0=64 1=1 2=1 3=1 4=0 5=1 6=12288
+BatchNorm        BatchNorm_5      1 1 ConvNd_5 BatchNorm_5 0=64
+Scale            BatchNorm_5_scale 1 1 BatchNorm_5 BatchNorm_5_scale 0=64 1=1
+ReLU             Threshold_5      1 1 BatchNorm_5_scale Threshold_5 0=0.000000
+Convolution      ConvNd_6         1 1 Threshold_5 ConvNd_6 0=64 1=3 2=1 3=1 4=1 5=1 6=36864
+BatchNorm        BatchNorm_6      1 1 ConvNd_6 BatchNorm_6 0=64
+Scale            BatchNorm_6_scale 1 1 BatchNorm_6 BatchNorm_6_scale 0=64 1=1
+ReLU             Threshold_6      1 1 BatchNorm_6_scale Threshold_6 0=0.000000
+Convolution      ConvNd_7         1 1 MaxPool2d_2 ConvNd_7 0=64 1=1 2=1 3=1 4=0 5=1 6=12288
+BatchNorm        BatchNorm_7      1 1 ConvNd_7 BatchNorm_7 0=64
+Scale            BatchNorm_7_scale 1 1 BatchNorm_7 BatchNorm_7_scale 0=64 1=1
+ReLU             Threshold_7      1 1 BatchNorm_7_scale Threshold_7 0=0.000000
+Convolution      ConvNd_8         1 1 Threshold_7 ConvNd_8 0=96 1=3 2=1 3=1 4=1 5=1 6=55296
+BatchNorm        BatchNorm_8      1 1 ConvNd_8 BatchNorm_8 0=96
+Scale            BatchNorm_8_scale 1 1 BatchNorm_8 BatchNorm_8_scale 0=96 1=1
+ReLU             Threshold_8      1 1 BatchNorm_8_scale Threshold_8 0=0.000000
+Convolution      ConvNd_9         1 1 Threshold_8 ConvNd_9 0=96 1=3 2=1 3=1 4=1 5=1 6=82944
+BatchNorm        BatchNorm_9      1 1 ConvNd_9 BatchNorm_9 0=96
+Scale            BatchNorm_9_scale 1 1 BatchNorm_9 BatchNorm_9_scale 0=96 1=1
+ReLU             Threshold_9      1 1 BatchNorm_9_scale Threshold_9 0=0.000000
+Pooling          AvgPool2d_1      1 1 MaxPool2d_2 AvgPool2d_1 0=1 1=3 2=1 3=1 4=0
+Convolution      ConvNd_10        1 1 AvgPool2d_1 ConvNd_10 0=32 1=1 2=1 3=1 4=0 5=1 6=6144
+BatchNorm        BatchNorm_10     1 1 ConvNd_10 BatchNorm_10 0=32
+Scale            BatchNorm_10_scale 1 1 BatchNorm_10 BatchNorm_10_scale 0=32 1=1
+ReLU             Threshold_10     1 1 BatchNorm_10_scale Threshold_10 0=0.000000
+Concat           Concat_1         4 1 Threshold_4 Threshold_6 Threshold_9 Threshold_10 Concat_1
+Convolution      ConvNd_11        1 1 Concat_1 ConvNd_11 0=64 1=1 2=1 3=1 4=0 5=1 6=16384
+BatchNorm        BatchNorm_11     1 1 ConvNd_11 BatchNorm_11 0=64
+Scale            BatchNorm_11_scale 1 1 BatchNorm_11 BatchNorm_11_scale 0=64 1=1
+ReLU             Threshold_11     1 1 BatchNorm_11_scale Threshold_11 0=0.000000
+Convolution      ConvNd_12        1 1 Concat_1 ConvNd_12 0=64 1=1 2=1 3=1 4=0 5=1 6=16384
+BatchNorm        BatchNorm_12     1 1 ConvNd_12 BatchNorm_12 0=64
+Scale            BatchNorm_12_scale 1 1 BatchNorm_12 BatchNorm_12_scale 0=64 1=1
+ReLU             Threshold_12     1 1 BatchNorm_12_scale Threshold_12 0=0.000000
+Convolution      ConvNd_13        1 1 Threshold_12 ConvNd_13 0=96 1=3 2=1 3=1 4=1 5=1 6=55296
+BatchNorm        BatchNorm_13     1 1 ConvNd_13 BatchNorm_13 0=96
+Scale            BatchNorm_13_scale 1 1 BatchNorm_13 BatchNorm_13_scale 0=96 1=1
+ReLU             Threshold_13     1 1 BatchNorm_13_scale Threshold_13 0=0.000000
+Convolution      ConvNd_14        1 1 Concat_1 ConvNd_14 0=64 1=1 2=1 3=1 4=0 5=1 6=16384
+BatchNorm        BatchNorm_14     1 1 ConvNd_14 BatchNorm_14 0=64
+Scale            BatchNorm_14_scale 1 1 BatchNorm_14 BatchNorm_14_scale 0=64 1=1
+ReLU             Threshold_14     1 1 BatchNorm_14_scale Threshold_14 0=0.000000
+Convolution      ConvNd_15        1 1 Threshold_14 ConvNd_15 0=96 1=3 2=1 3=1 4=1 5=1 6=55296
+BatchNorm        BatchNorm_15     1 1 ConvNd_15 BatchNorm_15 0=96
+Scale            BatchNorm_15_scale 1 1 BatchNorm_15 BatchNorm_15_scale 0=96 1=1
+ReLU             Threshold_15     1 1 BatchNorm_15_scale Threshold_15 0=0.000000
+Convolution      ConvNd_16        1 1 Threshold_15 ConvNd_16 0=96 1=3 2=1 3=1 4=1 5=1 6=82944
+BatchNorm        BatchNorm_16     1 1 ConvNd_16 BatchNorm_16 0=96
+Scale            BatchNorm_16_scale 1 1 BatchNorm_16 BatchNorm_16_scale 0=96 1=1
+ReLU             Threshold_16     1 1 BatchNorm_16_scale Threshold_16 0=0.000000
+Pooling          AvgPool2d_2      1 1 Concat_1 AvgPool2d_2 0=1 1=3 2=1 3=1 4=0
+Convolution      ConvNd_17        1 1 AvgPool2d_2 ConvNd_17 0=64 1=1 2=1 3=1 4=0 5=1 6=16384
+BatchNorm        BatchNorm_17     1 1 ConvNd_17 BatchNorm_17 0=64
+Scale            BatchNorm_17_scale 1 1 BatchNorm_17 BatchNorm_17_scale 0=64 1=1
+ReLU             Threshold_17     1 1 BatchNorm_17_scale Threshold_17 0=0.000000
+Concat           Concat_2         4 1 Threshold_11 Threshold_13 Threshold_16 Threshold_17 Concat_2
+Convolution      ConvNd_18        1 1 Concat_2 ConvNd_18 0=128 1=1 2=1 3=1 4=0 5=1 6=40960
+BatchNorm        BatchNorm_18     1 1 ConvNd_18 BatchNorm_18 0=128
+Scale            BatchNorm_18_scale 1 1 BatchNorm_18 BatchNorm_18_scale 0=128 1=1
+ReLU             Threshold_18     1 1 BatchNorm_18_scale Threshold_18 0=0.000000
+Convolution      ConvNd_19        1 1 Threshold_18 ConvNd_19 0=160 1=3 2=1 3=2 4=1 5=1 6=184320
+BatchNorm        BatchNorm_19     1 1 ConvNd_19 BatchNorm_19 0=160
+Scale            BatchNorm_19_scale 1 1 BatchNorm_19 BatchNorm_19_scale 0=160 1=1
+ReLU             Threshold_19     1 1 BatchNorm_19_scale Threshold_19 0=0.000000
+Convolution      ConvNd_20        1 1 Concat_2 ConvNd_20 0=64 1=1 2=1 3=1 4=0 5=1 6=20480
+BatchNorm        BatchNorm_20     1 1 ConvNd_20 BatchNorm_20 0=64
+Scale            BatchNorm_20_scale 1 1 BatchNorm_20 BatchNorm_20_scale 0=64 1=1
+ReLU             Threshold_20     1 1 BatchNorm_20_scale Threshold_20 0=0.000000
+Convolution      ConvNd_21        1 1 Threshold_20 ConvNd_21 0=96 1=3 2=1 3=1 4=1 5=1 6=55296
+BatchNorm        BatchNorm_21     1 1 ConvNd_21 BatchNorm_21 0=96
+Scale            BatchNorm_21_scale 1 1 BatchNorm_21 BatchNorm_21_scale 0=96 1=1
+ReLU             Threshold_21     1 1 BatchNorm_21_scale Threshold_21 0=0.000000
+Convolution      ConvNd_22        1 1 Threshold_21 ConvNd_22 0=96 1=3 2=1 3=2 4=1 5=1 6=82944
+BatchNorm        BatchNorm_22     1 1 ConvNd_22 BatchNorm_22 0=96
+Scale            BatchNorm_22_scale 1 1 BatchNorm_22 BatchNorm_22_scale 0=96 1=1
+ReLU             Threshold_22     1 1 BatchNorm_22_scale Threshold_22 0=0.000000
+Pooling          MaxPool2d_3      1 1 Concat_2 MaxPool2d_3 0=0 1=3 2=2 3=0 4=0
+Concat           Concat_3         3 1 Threshold_19 Threshold_22 MaxPool2d_3 Concat_3
+Convolution      ConvNd_23        1 1 Concat_3 ConvNd_23 0=224 1=1 2=1 3=1 4=0 5=1 6=129024
+BatchNorm        BatchNorm_23     1 1 ConvNd_23 BatchNorm_23 0=224
+Scale            BatchNorm_23_scale 1 1 BatchNorm_23 BatchNorm_23_scale 0=224 1=1
+ReLU             Threshold_23     1 1 BatchNorm_23_scale Threshold_23 0=0.000000
+Convolution      ConvNd_24        1 1 Concat_3 ConvNd_24 0=64 1=1 2=1 3=1 4=0 5=1 6=36864
+BatchNorm        BatchNorm_24     1 1 ConvNd_24 BatchNorm_24 0=64
+Scale            BatchNorm_24_scale 1 1 BatchNorm_24 BatchNorm_24_scale 0=64 1=1
+ReLU             Threshold_24     1 1 BatchNorm_24_scale Threshold_24 0=0.000000
+Convolution      ConvNd_25        1 1 Threshold_24 ConvNd_25 0=96 1=3 2=1 3=1 4=1 5=1 6=55296
+BatchNorm        BatchNorm_25     1 1 ConvNd_25 BatchNorm_25 0=96
+Scale            BatchNorm_25_scale 1 1 BatchNorm_25 BatchNorm_25_scale 0=96 1=1
+ReLU             Threshold_25     1 1 BatchNorm_25_scale Threshold_25 0=0.000000
+Convolution      ConvNd_26        1 1 Concat_3 ConvNd_26 0=96 1=1 2=1 3=1 4=0 5=1 6=55296
+BatchNorm        BatchNorm_26     1 1 ConvNd_26 BatchNorm_26 0=96
+Scale            BatchNorm_26_scale 1 1 BatchNorm_26 BatchNorm_26_scale 0=96 1=1
+ReLU             Threshold_26     1 1 BatchNorm_26_scale Threshold_26 0=0.000000
+Convolution      ConvNd_27        1 1 Threshold_26 ConvNd_27 0=128 1=3 2=1 3=1 4=1 5=1 6=110592
+BatchNorm        BatchNorm_27     1 1 ConvNd_27 BatchNorm_27 0=128
+Scale            BatchNorm_27_scale 1 1 BatchNorm_27 BatchNorm_27_scale 0=128 1=1
+ReLU             Threshold_27     1 1 BatchNorm_27_scale Threshold_27 0=0.000000
+Convolution      ConvNd_28        1 1 Threshold_27 ConvNd_28 0=128 1=3 2=1 3=1 4=1 5=1 6=147456
+BatchNorm        BatchNorm_28     1 1 ConvNd_28 BatchNorm_28 0=128
+Scale            BatchNorm_28_scale 1 1 BatchNorm_28 BatchNorm_28_scale 0=128 1=1
+ReLU             Threshold_28     1 1 BatchNorm_28_scale Threshold_28 0=0.000000
+Pooling          AvgPool2d_3      1 1 Concat_3 AvgPool2d_3 0=1 1=3 2=1 3=1 4=0
+Convolution      ConvNd_29        1 1 AvgPool2d_3 ConvNd_29 0=128 1=1 2=1 3=1 4=0 5=1 6=73728
+BatchNorm        BatchNorm_29     1 1 ConvNd_29 BatchNorm_29 0=128
+Scale            BatchNorm_29_scale 1 1 BatchNorm_29 BatchNorm_29_scale 0=128 1=1
+ReLU             Threshold_29     1 1 BatchNorm_29_scale Threshold_29 0=0.000000
+Concat           Concat_4         4 1 Threshold_23 Threshold_25 Threshold_28 Threshold_29 Concat_4
+Convolution      ConvNd_30        1 1 Concat_4 ConvNd_30 0=192 1=1 2=1 3=1 4=0 5=1 6=110592
+BatchNorm        BatchNorm_30     1 1 ConvNd_30 BatchNorm_30 0=192
+Scale            BatchNorm_30_scale 1 1 BatchNorm_30 BatchNorm_30_scale 0=192 1=1
+ReLU             Threshold_30     1 1 BatchNorm_30_scale Threshold_30 0=0.000000
+Convolution      ConvNd_31        1 1 Concat_4 ConvNd_31 0=96 1=1 2=1 3=1 4=0 5=1 6=55296
+BatchNorm        BatchNorm_31     1 1 ConvNd_31 BatchNorm_31 0=96
+Scale            BatchNorm_31_scale 1 1 BatchNorm_31 BatchNorm_31_scale 0=96 1=1
+ReLU             Threshold_31     1 1 BatchNorm_31_scale Threshold_31 0=0.000000
+Convolution      ConvNd_32        1 1 Threshold_31 ConvNd_32 0=128 1=3 2=1 3=1 4=1 5=1 6=110592
+BatchNorm        BatchNorm_32     1 1 ConvNd_32 BatchNorm_32 0=128
+Scale            BatchNorm_32_scale 1 1 BatchNorm_32 BatchNorm_32_scale 0=128 1=1
+ReLU             Threshold_32     1 1 BatchNorm_32_scale Threshold_32 0=0.000000
+Convolution      ConvNd_33        1 1 Concat_4 ConvNd_33 0=96 1=1 2=1 3=1 4=0 5=1 6=55296
+BatchNorm        BatchNorm_33     1 1 ConvNd_33 BatchNorm_33 0=96
+Scale            BatchNorm_33_scale 1 1 BatchNorm_33 BatchNorm_33_scale 0=96 1=1
+ReLU             Threshold_33     1 1 BatchNorm_33_scale Threshold_33 0=0.000000
+Convolution      ConvNd_34        1 1 Threshold_33 ConvNd_34 0=128 1=3 2=1 3=1 4=1 5=1 6=110592
+BatchNorm        BatchNorm_34     1 1 ConvNd_34 BatchNorm_34 0=128
+Scale            BatchNorm_34_scale 1 1 BatchNorm_34 BatchNorm_34_scale 0=128 1=1
+ReLU             Threshold_34     1 1 BatchNorm_34_scale Threshold_34 0=0.000000
+Convolution      ConvNd_35        1 1 Threshold_34 ConvNd_35 0=128 1=3 2=1 3=1 4=1 5=1 6=147456
+BatchNorm        BatchNorm_35     1 1 ConvNd_35 BatchNorm_35 0=128
+Scale            BatchNorm_35_scale 1 1 BatchNorm_35 BatchNorm_35_scale 0=128 1=1
+ReLU             Threshold_35     1 1 BatchNorm_35_scale Threshold_35 0=0.000000
+Pooling          AvgPool2d_4      1 1 Concat_4 AvgPool2d_4 0=1 1=3 2=1 3=1 4=0
+Convolution      ConvNd_36        1 1 AvgPool2d_4 ConvNd_36 0=128 1=1 2=1 3=1 4=0 5=1 6=73728
+BatchNorm        BatchNorm_36     1 1 ConvNd_36 BatchNorm_36 0=128
+Scale            BatchNorm_36_scale 1 1 BatchNorm_36 BatchNorm_36_scale 0=128 1=1
+ReLU             Threshold_36     1 1 BatchNorm_36_scale Threshold_36 0=0.000000
+Concat           Concat_5         4 1 Threshold_30 Threshold_32 Threshold_35 Threshold_36 Concat_5
+Convolution      ConvNd_37        1 1 Concat_5 ConvNd_37 0=160 1=1 2=1 3=1 4=0 5=1 6=92160
+BatchNorm        BatchNorm_37     1 1 ConvNd_37 BatchNorm_37 0=160
+Scale            BatchNorm_37_scale 1 1 BatchNorm_37 BatchNorm_37_scale 0=160 1=1
+ReLU             Threshold_37     1 1 BatchNorm_37_scale Threshold_37 0=0.000000
+Convolution      ConvNd_38        1 1 Concat_5 ConvNd_38 0=128 1=1 2=1 3=1 4=0 5=1 6=73728
+BatchNorm        BatchNorm_38     1 1 ConvNd_38 BatchNorm_38 0=128
+Scale            BatchNorm_38_scale 1 1 BatchNorm_38 BatchNorm_38_scale 0=128 1=1
+ReLU             Threshold_38     1 1 BatchNorm_38_scale Threshold_38 0=0.000000
+Convolution      ConvNd_39        1 1 Threshold_38 ConvNd_39 0=160 1=3 2=1 3=1 4=1 5=1 6=184320
+BatchNorm        BatchNorm_39     1 1 ConvNd_39 BatchNorm_39 0=160
+Scale            BatchNorm_39_scale 1 1 BatchNorm_39 BatchNorm_39_scale 0=160 1=1
+ReLU             Threshold_39     1 1 BatchNorm_39_scale Threshold_39 0=0.000000
+Convolution      ConvNd_40        1 1 Concat_5 ConvNd_40 0=128 1=1 2=1 3=1 4=0 5=1 6=73728
+BatchNorm        BatchNorm_40     1 1 ConvNd_40 BatchNorm_40 0=128
+Scale            BatchNorm_40_scale 1 1 BatchNorm_40 BatchNorm_40_scale 0=128 1=1
+ReLU             Threshold_40     1 1 BatchNorm_40_scale Threshold_40 0=0.000000
+Convolution      ConvNd_41        1 1 Threshold_40 ConvNd_41 0=160 1=3 2=1 3=1 4=1 5=1 6=184320
+BatchNorm        BatchNorm_41     1 1 ConvNd_41 BatchNorm_41 0=160
+Scale            BatchNorm_41_scale 1 1 BatchNorm_41 BatchNorm_41_scale 0=160 1=1
+ReLU             Threshold_41     1 1 BatchNorm_41_scale Threshold_41 0=0.000000
+Convolution      ConvNd_42        1 1 Threshold_41 ConvNd_42 0=160 1=3 2=1 3=1 4=1 5=1 6=230400
+BatchNorm        BatchNorm_42     1 1 ConvNd_42 BatchNorm_42 0=160
+Scale            BatchNorm_42_scale 1 1 BatchNorm_42 BatchNorm_42_scale 0=160 1=1
+ReLU             Threshold_42     1 1 BatchNorm_42_scale Threshold_42 0=0.000000
+Pooling          AvgPool2d_5      1 1 Concat_5 AvgPool2d_5 0=1 1=3 2=1 3=1 4=0
+Convolution      ConvNd_43        1 1 AvgPool2d_5 ConvNd_43 0=128 1=1 2=1 3=1 4=0 5=1 6=73728
+BatchNorm        BatchNorm_43     1 1 ConvNd_43 BatchNorm_43 0=128
+Scale            BatchNorm_43_scale 1 1 BatchNorm_43 BatchNorm_43_scale 0=128 1=1
+ReLU             Threshold_43     1 1 BatchNorm_43_scale Threshold_43 0=0.000000
+Concat           Concat_6         4 1 Threshold_37 Threshold_39 Threshold_42 Threshold_43 Concat_6
+Convolution      ConvNd_44        1 1 Concat_6 ConvNd_44 0=96 1=1 2=1 3=1 4=0 5=1 6=58368
+BatchNorm        BatchNorm_44     1 1 ConvNd_44 BatchNorm_44 0=96
+Scale            BatchNorm_44_scale 1 1 BatchNorm_44 BatchNorm_44_scale 0=96 1=1
+ReLU             Threshold_44     1 1 BatchNorm_44_scale Threshold_44 0=0.000000
+Convolution      ConvNd_45        1 1 Concat_6 ConvNd_45 0=128 1=1 2=1 3=1 4=0 5=1 6=77824
+BatchNorm        BatchNorm_45     1 1 ConvNd_45 BatchNorm_45 0=128
+Scale            BatchNorm_45_scale 1 1 BatchNorm_45 BatchNorm_45_scale 0=128 1=1
+ReLU             Threshold_45     1 1 BatchNorm_45_scale Threshold_45 0=0.000000
+Convolution      ConvNd_46        1 1 Threshold_45 ConvNd_46 0=192 1=3 2=1 3=1 4=1 5=1 6=221184
+BatchNorm        BatchNorm_46     1 1 ConvNd_46 BatchNorm_46 0=192
+Scale            BatchNorm_46_scale 1 1 BatchNorm_46 BatchNorm_46_scale 0=192 1=1
+ReLU             Threshold_46     1 1 BatchNorm_46_scale Threshold_46 0=0.000000
+Convolution      ConvNd_47        1 1 Concat_6 ConvNd_47 0=160 1=1 2=1 3=1 4=0 5=1 6=97280
+BatchNorm        BatchNorm_47     1 1 ConvNd_47 BatchNorm_47 0=160
+Scale            BatchNorm_47_scale 1 1 BatchNorm_47 BatchNorm_47_scale 0=160 1=1
+ReLU             Threshold_47     1 1 BatchNorm_47_scale Threshold_47 0=0.000000
+Convolution      ConvNd_48        1 1 Threshold_47 ConvNd_48 0=192 1=3 2=1 3=1 4=1 5=1 6=276480
+BatchNorm        BatchNorm_48     1 1 ConvNd_48 BatchNorm_48 0=192
+Scale            BatchNorm_48_scale 1 1 BatchNorm_48 BatchNorm_48_scale 0=192 1=1
+ReLU             Threshold_48     1 1 BatchNorm_48_scale Threshold_48 0=0.000000
+Convolution      ConvNd_49        1 1 Threshold_48 ConvNd_49 0=192 1=3 2=1 3=1 4=1 5=1 6=331776
+BatchNorm        BatchNorm_49     1 1 ConvNd_49 BatchNorm_49 0=192
+Scale            BatchNorm_49_scale 1 1 BatchNorm_49 BatchNorm_49_scale 0=192 1=1
+ReLU             Threshold_49     1 1 BatchNorm_49_scale Threshold_49 0=0.000000
+Pooling          AvgPool2d_6      1 1 Concat_6 AvgPool2d_6 0=1 1=3 2=1 3=1 4=0
+Convolution      ConvNd_50        1 1 AvgPool2d_6 ConvNd_50 0=128 1=1 2=1 3=1 4=0 5=1 6=77824
+BatchNorm        BatchNorm_50     1 1 ConvNd_50 BatchNorm_50 0=128
+Scale            BatchNorm_50_scale 1 1 BatchNorm_50 BatchNorm_50_scale 0=128 1=1
+ReLU             Threshold_50     1 1 BatchNorm_50_scale Threshold_50 0=0.000000
+Concat           Concat_7         4 1 Threshold_44 Threshold_46 Threshold_49 Threshold_50 Concat_7
+Convolution      ConvNd_51        1 1 Concat_7 ConvNd_51 0=128 1=1 2=1 3=1 4=0 5=1 6=77824
+BatchNorm        BatchNorm_51     1 1 ConvNd_51 BatchNorm_51 0=128
+Scale            BatchNorm_51_scale 1 1 BatchNorm_51 BatchNorm_51_scale 0=128 1=1
+ReLU             Threshold_51     1 1 BatchNorm_51_scale Threshold_51 0=0.000000
+Convolution      ConvNd_52        1 1 Threshold_51 ConvNd_52 0=192 1=3 2=1 3=2 4=1 5=1 6=221184
+BatchNorm        BatchNorm_52     1 1 ConvNd_52 BatchNorm_52 0=192
+Scale            BatchNorm_52_scale 1 1 BatchNorm_52 BatchNorm_52_scale 0=192 1=1
+ReLU             Threshold_52     1 1 BatchNorm_52_scale Threshold_52 0=0.000000
+Convolution      ConvNd_53        1 1 Concat_7 ConvNd_53 0=192 1=1 2=1 3=1 4=0 5=1 6=116736
+BatchNorm        BatchNorm_53     1 1 ConvNd_53 BatchNorm_53 0=192
+Scale            BatchNorm_53_scale 1 1 BatchNorm_53 BatchNorm_53_scale 0=192 1=1
+ReLU             Threshold_53     1 1 BatchNorm_53_scale Threshold_53 0=0.000000
+Convolution      ConvNd_54        1 1 Threshold_53 ConvNd_54 0=256 1=3 2=1 3=1 4=1 5=1 6=442368
+BatchNorm        BatchNorm_54     1 1 ConvNd_54 BatchNorm_54 0=256
+Scale            BatchNorm_54_scale 1 1 BatchNorm_54 BatchNorm_54_scale 0=256 1=1
+ReLU             Threshold_54     1 1 BatchNorm_54_scale Threshold_54 0=0.000000
+Convolution      ConvNd_55        1 1 Threshold_54 ConvNd_55 0=256 1=3 2=1 3=2 4=1 5=1 6=589824
+BatchNorm        BatchNorm_55     1 1 ConvNd_55 BatchNorm_55 0=256
+Scale            BatchNorm_55_scale 1 1 BatchNorm_55 BatchNorm_55_scale 0=256 1=1
+ReLU             Threshold_55     1 1 BatchNorm_55_scale Threshold_55 0=0.000000
+Pooling          MaxPool2d_4      1 1 Concat_7 MaxPool2d_4 0=0 1=3 2=2 3=0 4=0
+Concat           Concat_8         3 1 Threshold_52 Threshold_55 MaxPool2d_4 Concat_8
+Convolution      ConvNd_56        1 1 Concat_8 ConvNd_56 0=352 1=1 2=1 3=1 4=0 5=1 6=371712
+BatchNorm        BatchNorm_56     1 1 ConvNd_56 BatchNorm_56 0=352
+Scale            BatchNorm_56_scale 1 1 BatchNorm_56 BatchNorm_56_scale 0=352 1=1
+ReLU             Threshold_56     1 1 BatchNorm_56_scale Threshold_56 0=0.000000
+Convolution      ConvNd_57        1 1 Concat_8 ConvNd_57 0=192 1=1 2=1 3=1 4=0 5=1 6=202752
+BatchNorm        BatchNorm_57     1 1 ConvNd_57 BatchNorm_57 0=192
+Scale            BatchNorm_57_scale 1 1 BatchNorm_57 BatchNorm_57_scale 0=192 1=1
+ReLU             Threshold_57     1 1 BatchNorm_57_scale Threshold_57 0=0.000000
+Convolution      ConvNd_58        1 1 Threshold_57 ConvNd_58 0=320 1=3 2=1 3=1 4=1 5=1 6=552960
+BatchNorm        BatchNorm_58     1 1 ConvNd_58 BatchNorm_58 0=320
+Scale            BatchNorm_58_scale 1 1 BatchNorm_58 BatchNorm_58_scale 0=320 1=1
+ReLU             Threshold_58     1 1 BatchNorm_58_scale Threshold_58 0=0.000000
+Convolution      ConvNd_59        1 1 Concat_8 ConvNd_59 0=160 1=1 2=1 3=1 4=0 5=1 6=168960
+BatchNorm        BatchNorm_59     1 1 ConvNd_59 BatchNorm_59 0=160
+Scale            BatchNorm_59_scale 1 1 BatchNorm_59 BatchNorm_59_scale 0=160 1=1
+ReLU             Threshold_59     1 1 BatchNorm_59_scale Threshold_59 0=0.000000
+Convolution      ConvNd_60        1 1 Threshold_59 ConvNd_60 0=224 1=3 2=1 3=1 4=1 5=1 6=322560
+BatchNorm        BatchNorm_60     1 1 ConvNd_60 BatchNorm_60 0=224
+Scale            BatchNorm_60_scale 1 1 BatchNorm_60 BatchNorm_60_scale 0=224 1=1
+ReLU             Threshold_60     1 1 BatchNorm_60_scale Threshold_60 0=0.000000
+Convolution      ConvNd_61        1 1 Threshold_60 ConvNd_61 0=224 1=3 2=1 3=1 4=1 5=1 6=451584
+BatchNorm        BatchNorm_61     1 1 ConvNd_61 BatchNorm_61 0=224
+Scale            BatchNorm_61_scale 1 1 BatchNorm_61 BatchNorm_61_scale 0=224 1=1
+ReLU             Threshold_61     1 1 BatchNorm_61_scale Threshold_61 0=0.000000
+Pooling          AvgPool2d_7      1 1 Concat_8 AvgPool2d_7 0=1 1=3 2=1 3=1 4=0
+Convolution      ConvNd_62        1 1 AvgPool2d_7 ConvNd_62 0=128 1=1 2=1 3=1 4=0 5=1 6=135168
+BatchNorm        BatchNorm_62     1 1 ConvNd_62 BatchNorm_62 0=128
+Scale            BatchNorm_62_scale 1 1 BatchNorm_62 BatchNorm_62_scale 0=128 1=1
+ReLU             Threshold_62     1 1 BatchNorm_62_scale Threshold_62 0=0.000000
+Concat           Concat_9         4 1 Threshold_56 Threshold_58 Threshold_61 Threshold_62 Concat_9
+Convolution      ConvNd_63        1 1 Concat_9 ConvNd_63 0=352 1=1 2=1 3=1 4=0 5=1 6=360448
+BatchNorm        BatchNorm_63     1 1 ConvNd_63 BatchNorm_63 0=352
+Scale            BatchNorm_63_scale 1 1 BatchNorm_63 BatchNorm_63_scale 0=352 1=1
+ReLU             Threshold_63     1 1 BatchNorm_63_scale Threshold_63 0=0.000000
+Convolution      ConvNd_64        1 1 Concat_9 ConvNd_64 0=192 1=1 2=1 3=1 4=0 5=1 6=196608
+BatchNorm        BatchNorm_64     1 1 ConvNd_64 BatchNorm_64 0=192
+Scale            BatchNorm_64_scale 1 1 BatchNorm_64 BatchNorm_64_scale 0=192 1=1
+ReLU             Threshold_64     1 1 BatchNorm_64_scale Threshold_64 0=0.000000
+Convolution      ConvNd_65        1 1 Threshold_64 ConvNd_65 0=320 1=3 2=1 3=1 4=1 5=1 6=552960
+BatchNorm        BatchNorm_65     1 1 ConvNd_65 BatchNorm_65 0=320
+Scale            BatchNorm_65_scale 1 1 BatchNorm_65 BatchNorm_65_scale 0=320 1=1
+ReLU             Threshold_65     1 1 BatchNorm_65_scale Threshold_65 0=0.000000
+Convolution      ConvNd_66        1 1 Concat_9 ConvNd_66 0=192 1=1 2=1 3=1 4=0 5=1 6=196608
+BatchNorm        BatchNorm_66     1 1 ConvNd_66 BatchNorm_66 0=192
+Scale            BatchNorm_66_scale 1 1 BatchNorm_66 BatchNorm_66_scale 0=192 1=1
+ReLU             Threshold_66     1 1 BatchNorm_66_scale Threshold_66 0=0.000000
+Convolution      ConvNd_67        1 1 Threshold_66 ConvNd_67 0=224 1=3 2=1 3=1 4=1 5=1 6=387072
+BatchNorm        BatchNorm_67     1 1 ConvNd_67 BatchNorm_67 0=224
+Scale            BatchNorm_67_scale 1 1 BatchNorm_67 BatchNorm_67_scale 0=224 1=1
+ReLU             Threshold_67     1 1 BatchNorm_67_scale Threshold_67 0=0.000000
+Convolution      ConvNd_68        1 1 Threshold_67 ConvNd_68 0=224 1=3 2=1 3=1 4=1 5=1 6=451584
+BatchNorm        BatchNorm_68     1 1 ConvNd_68 BatchNorm_68 0=224
+Scale            BatchNorm_68_scale 1 1 BatchNorm_68 BatchNorm_68_scale 0=224 1=1
+ReLU             Threshold_68     1 1 BatchNorm_68_scale Threshold_68 0=0.000000
+Pooling          MaxPool2d_5      1 1 Concat_9 MaxPool2d_5 0=0 1=3 2=1 3=1 4=0
+Convolution      ConvNd_69        1 1 MaxPool2d_5 ConvNd_69 0=128 1=1 2=1 3=1 4=0 5=1 6=131072
+BatchNorm        BatchNorm_69     1 1 ConvNd_69 BatchNorm_69 0=128
+Scale            BatchNorm_69_scale 1 1 BatchNorm_69 BatchNorm_69_scale 0=128 1=1
+ReLU             Threshold_69     1 1 BatchNorm_69_scale Threshold_69 0=0.000000
+Concat           Concat_10        4 1 Threshold_63 Threshold_65 Threshold_68 Threshold_69 Concat_10
+Pooling          AdaptiveMaxPool2d_1  1 1 Concat_10 AdaptiveMaxPool2d_1 0=0 1=7
+Flatten          View_1           1 1 AdaptiveMaxPool2d_1 View_1
+InnerProduct     Addmm_1          1 1 View_1 Addmm_1 0=512 1=1 2=524288
