@@ -93,7 +93,9 @@ int knn(std::vector< std::pair<int, float> >& re, int k, float threshold)
             }
             // printf("(ID:%d)__ballot:%d\n", vote[j].first, vote[j].second);
         }   
+#ifdef DEBUG
         printf("results:\n(ID:%d)__ballot:%d\n", vote[max].first, vote[max].second);
+#endif
         return vote[max].first;
     }
     else
@@ -218,10 +220,14 @@ void DKObjectRegisterEnd(int flag, int count)
     int  rc;
     rc = sqlite3_exec(objectfeatures, sql, NULL, 0, &zErrMsg);
     if( rc != SQLITE_OK ){
+#ifdef DEBUG
        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+#endif       
        sqlite3_free(zErrMsg);
     }else{
-       fprintf(stdout, "Operate on Table FEATURES\n");
+#ifdef DEBUG 
+    fprintf(stdout, "Operate on Table FEATURES\n");
+#endif
     }
 
     sqlite3_stmt* stat;
@@ -234,7 +240,9 @@ void DKObjectRegisterEnd(int flag, int count)
         sqlite3_stmt* stat;
         int rc = sqlite3_prepare_v2(objectfeatures, "SELECT max(rowid),NUMFEA FROM FEATURES", -1, &stat, NULL);
         if(rc!=SQLITE_OK) {
+#ifdef DEBUG 
             fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(objectfeatures));
+#endif
             exit(1);
         }      
 
@@ -249,14 +257,18 @@ void DKObjectRegisterEnd(int flag, int count)
         rc = sqlite3_blob_open(objectfeatures, "main", "FEATURES", "FEAOFOBJ", rid, 1, &blob);
         if (rc != SQLITE_OK)
         {
+#ifdef DEBUG
             printf("Failed to open BLOB: %s \n", sqlite3_errmsg(objectfeatures));             
+#endif
             return ;
         }
 
         sqlite3_blob_write(blob, fc, 2048, numfea*2048);
         if (rc != SQLITE_OK)
         {
+#ifdef DEBUG
             fprintf(stderr, "failed to write feature_BLOB!\n");
+#endif
             return ;
         }
                
@@ -272,7 +284,9 @@ void DKObjectRegisterEnd(int flag, int count)
         sqlite3_finalize(stat);
         
         registernum = numfea + 1;  
+#ifdef DEBUG
         fprintf(stderr, "Records (rowid)%d insert %dth feature successfully!\n", rid, numfea+1);
+#endif
     } 
     else
     {   
@@ -287,11 +301,15 @@ void DKObjectRegisterEnd(int flag, int count)
         sqlite3_bind_blob(stat, 2, fe, 20480, SQLITE_STATIC);
         rc = sqlite3_step(stat);
         if( rc != SQLITE_DONE ){
+#ifdef DEBUG
             printf("%s",sqlite3_errmsg(objectfeatures));
+#endif
             exit(1);
         }
         else{
+#ifdef DEBUG
             fprintf(stderr, "Records created successfully!\n");
+#endif
         }
         sqlite3_finalize(stat);
     }
@@ -317,7 +335,7 @@ void DKObjectRecognizationInit()
     }
     else
     {
-        fprintf(stdout, "Opened database successfully\n");
+        fprintf(stderr, "Opened database successfully\n");
     }
 
 }
@@ -462,7 +480,9 @@ int DKObjectRecognizationProcess(char* rgbfilename, int iWidth, int iHeight, DKS
         
             offset += size;
             dis = distance(fc, buf);
+#ifdef DEBUG
             fprintf(stderr, "%d_distance:%f\n",i, dis);
+#endif
             results.push_back(std::make_pair(i, dis));
         }
         sqlite3_blob_close(blob);
