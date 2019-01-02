@@ -126,6 +126,25 @@ char * DKObjectRegisterProcess(char* rgbfilename, int iWidth, int iHeight, DKSOb
     //使用图片路径进行测试（仅作测试时用,rgbfilename是jpg,png文件路径）
     dlib::array2d<dlib::rgb_pixel> img;
     load_image(img, rgbfilename);
+/*
+    int col = img.nc() / 2;
+    int row = img.nr() / 2; 
+    int x_left = iWidth / 4;
+    int y_top = iHeight / 4;
+    ncnn::Mat crop_image;
+    crop_image.create(col, row, 3, 1);
+
+    for(int i = y_top; i < y_top + row; i++)
+    {
+        for(int j=x_left; j < x_left + col; j++)
+        { 
+            *((unsigned char*)(crop_image.data)+3*(i-y_top)*col+3*(j-x_left))   = img[i][j].red;
+            *((unsigned char*)(crop_image.data)+3*(i-y_top)*col+3*(j-x_left)+1) = img[i][j].green;
+            *((unsigned char*)(crop_image.data)+3*(i-y_top)*col+3*(j-x_left)+2) = img[i][j].blue;
+        }
+    }
+*/
+    ncnn::Mat in = ncnn::Mat::from_pixels_resize((unsigned char*)&img[0][0], ncnn::Mat::PIXEL_RGB, img.nc(), img.nr(), 227, 227);
 
 #else
 
@@ -160,11 +179,7 @@ char * DKObjectRegisterProcess(char* rgbfilename, int iWidth, int iHeight, DKSOb
             *((unsigned char*)(crop_image.data)+3*(i-y_top)*col+3*(j-x_left)+2) = *(rgbData + channelstep * 2 + i * iWidth + j);
         }
     }
-#endif
 
-#ifdef JPG_DEMO
-    ncnn::Mat in = ncnn::Mat::from_pixels_resize((unsigned char*)&img[0][0], ncnn::Mat::PIXEL_RGB, img.nc(), img.nr(), 227, 227);
-#else
     ncnn::Mat in = ncnn::Mat::from_pixels_resize((unsigned char*)crop_image.data, ncnn::Mat::PIXEL_RGB, col, row, 227, 227);
 #endif
 
@@ -300,11 +315,33 @@ void DKObjectRecognizationInit()
 
 int DKObjectRecognizationProcess(char* rgbfilename, int iWidth, int iHeight, DKSObjectRecognizationParam param)
 {
+#ifdef DEBUG
     clock_t start = clock();
+#endif
 #ifdef JPG_DEMO
     //使用图片路径进行测试（仅作测试时用,rgbfilename是jpg,png文件路径）
     dlib::array2d<dlib::rgb_pixel> img;
     load_image(img, rgbfilename);
+/*
+    int col = img.nc() / 2;
+    int row = img.nr() / 2; 
+    int x_left = iWidth / 4;
+    int y_top = iHeight / 4;
+    ncnn::Mat crop_image;
+    crop_image.create(col, row, 3, 1);
+
+    for(int i = y_top; i < y_top + row; i++)
+    {
+        for(int j=x_left; j < x_left + col; j++)
+        { 
+            *((unsigned char*)(crop_image.data)+3*(i-y_top)*col+3*(j-x_left))   = img[i][j].red;
+            *((unsigned char*)(crop_image.data)+3*(i-y_top)*col+3*(j-x_left)+1) = img[i][j].green;
+            *((unsigned char*)(crop_image.data)+3*(i-y_top)*col+3*(j-x_left)+2) = img[i][j].blue;
+        }
+    }
+*/
+    ncnn::Mat in = ncnn::Mat::from_pixels_resize((unsigned char*)&img[0][0], ncnn::Mat::PIXEL_RGB, img.nc(), img.nr(), 227, 227);
+
 #else    
     FILE *stream = NULL; 
     stream = fopen(rgbfilename, "rb");   
@@ -337,11 +374,7 @@ int DKObjectRecognizationProcess(char* rgbfilename, int iWidth, int iHeight, DKS
             *((unsigned char*)(crop_image.data)+3*(i-y_top)*col+3*(j-x_left)+2) = *(rgbData + channelstep * 2 + i * iWidth + j);
         }
     }
-#endif
 
-#ifdef JPG_DEMO
-    ncnn::Mat in = ncnn::Mat::from_pixels_resize((unsigned char*)&img[0][0], ncnn::Mat::PIXEL_RGB, img.nc(), img.nr(), 227, 227);
-#else  
     ncnn::Mat in = ncnn::Mat::from_pixels_resize((unsigned char*)(crop_image.data), ncnn::Mat::PIXEL_RGB, col, row, 227, 227);
 #endif
 
@@ -352,13 +385,14 @@ int DKObjectRecognizationProcess(char* rgbfilename, int iWidth, int iHeight, DKS
     objectmatnet.load_param("objectmatnet.param");
     objectmatnet.load_model("objectmatnet.bin");
     ncnn::Extractor ex = objectmatnet.create_extractor();
-    ex.set_light_mode(false);
+    ex.set_light_mode(true);
     ex.input("data", in);
     ex.extract("fc_embedding", fc);
-    normalize(fc);
-    
+#ifdef DEBUG    
     clock_t finsh = clock();
     fprintf(stderr, "get_feature cost %d ms\n", (finsh-start)/1000);
+#endif
+    normalize(fc);
    
     //获取行数
     sqlite3_stmt* stat;
@@ -376,7 +410,9 @@ int DKObjectRecognizationProcess(char* rgbfilename, int iWidth, int iHeight, DKS
     sqlite3_finalize(stat);
 
     //读取数据库中脸部特征数据
+#ifdef DEBUG    
     start = clock();
+#endif
     int i=0;
     float dis;
     std::vector< std::pair<int, float> > results;
@@ -414,11 +450,11 @@ int DKObjectRecognizationProcess(char* rgbfilename, int iWidth, int iHeight, DKS
     }
     
     int ID;
-    ID = knn(results, 3, param.threshold);
-    
+    ID = knn(results, param.k, param.threshold);
+#ifdef DEBUG        
     finsh = clock();
     fprintf(stderr, "knn cost %d ms\n", (finsh - start)/1000);
-    
+#endif    
     return ID;
 
 }

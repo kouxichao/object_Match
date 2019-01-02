@@ -10,6 +10,7 @@
 typedef struct
 {
     float threshold; // 相似度阈值，相似度超过该值认为不能认出该物体
+    int k;//最近邻k值
 }DKSObjectRecognizationParam;
 
 typedef struct
@@ -56,7 +57,7 @@ void DKObjectRegisterInit();
 // 根据图像中间位置（1/4原图像大小）子图像计算特征
 char * DKObjectRegisterProcess(char * yuvfilename, int iWidth, int iHeight, DKSObjectRegisterParam param);
 
-// 将计算好的特征存入sqlite中（flag为1），或取消学习人脸（flag为0）
+// 将计算好的特征存入sqlite中（flag为1），或取消学习（flag为0）
 void DKObjectRegisterEnd(int flag, int count);
 
 #endif 

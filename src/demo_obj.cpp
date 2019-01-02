@@ -5,11 +5,10 @@ int main(int argc, char* argv[])
 {
     int  id, flag, count;
     
-    DKSObjectRegisterParam rgp;
-    rgp.index = 0;
+    DKSObjectRegisterParam rgp = {0};
     DKSObjectRecognizationParam rcp;
-    rcp.index = 0;
     rcp.threshold = 1;
+    rcp.k = 3;
     
     //注册
     if(*(argv[1]) == '0')
