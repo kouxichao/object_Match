@@ -20,6 +20,8 @@ src目录下使用以下命令运行：
 
 evaluate测试
 ```
+生成图片目录:cd src && python get_images.py 
+
 ./evaluate 0 ${image_dir} 生成特征库
 
 ./evaluate 1 ${image_dir} 测试准确率
